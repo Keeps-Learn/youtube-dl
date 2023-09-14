@@ -44,6 +44,7 @@ from ..utils import (
     NO_DEFAULT,
     age_restricted,
     base_url,
+    base_url_mpd,
     bug_reports_message,
     clean_html,
     compiled_regex_type,
@@ -2152,7 +2153,7 @@ class InfoExtractor(object):
         mpd_doc, urlh = res
         if mpd_doc is None:
             return []
-        mpd_base_url = base_url(urlh.geturl())
+        mpd_base_url = base_url_mpd(urlh.geturl())
 
         return self._parse_mpd_formats(
             mpd_doc, mpd_id, mpd_base_url, mpd_url)

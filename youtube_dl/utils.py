@@ -3807,6 +3807,10 @@ def base_url(url):
     return re.match(r'https?://[^?#&]+/', url).group()
 
 
+def base_url_mpd(url):
+    return re.match(r'https?://[^?#]+/', url).group()
+
+
 def urljoin(base, path):
     path = _decode_compat_str(path, encoding='utf-8', or_none=True)
     if not path:
