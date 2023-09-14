@@ -21,6 +21,7 @@ from youtube_dl.utils import (
     age_restricted,
     args_to_str,
     base_url,
+    base_url_mpd,
     caesar,
     clean_html,
     clean_podcast_url,
@@ -544,6 +545,14 @@ class TestUtil(unittest.TestCase):
         self.assertEqual(base_url('http://foo.de/bar/'), 'http://foo.de/bar/')
         self.assertEqual(base_url('http://foo.de/bar/baz'), 'http://foo.de/bar/')
         self.assertEqual(base_url('http://foo.de/bar/baz?x=z/x/c'), 'http://foo.de/bar/')
+        self.assertEqual(base_url('http://foo.de/edge-tokenkey&A=W0MK/'), 'http://foo.de/')
+
+    def test_base_url_mpd(self):
+        self.assertEqual(base_url_mpd('http://foo.de/'), 'http://foo.de/')
+        self.assertEqual(base_url_mpd('http://foo.de/bar'), 'http://foo.de/')
+        self.assertEqual(base_url_mpd('http://foo.de/bar/'), 'http://foo.de/bar/')
+        self.assertEqual(base_url_mpd('http://foo.de/bar/baz'), 'http://foo.de/bar/')
+        self.assertEqual(base_url_mpd('http://foo.de/edge-tokenkey&A=W0MK/'), 'http://foo.de/edge-tokenkey&A=W0MK/')
 
     def test_urljoin(self):
         self.assertEqual(urljoin('http://foo.de/', '/a/b/c.txt'), 'http://foo.de/a/b/c.txt')
